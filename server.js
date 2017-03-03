@@ -11,8 +11,14 @@ app.get('/', function(req, res){
 });
 
 app.get('/api/whoami', function(req, res){
+    var ipAddress = req.connection.remoteAddress;
+    var lang = req.headers['accept-language'];
+    var software = req.headers['user-agent'];
+    
     res.json({
-        test: 'test'
+        ipaddress: ipAddress,
+        language: lang.substring(0, lang.indexOf(',')),
+        software: software.substring(software.indexOf('(') + 1, software.indexOf(')'))
     })
 });
 
