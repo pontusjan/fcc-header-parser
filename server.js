@@ -1,4 +1,5 @@
 var express = require('express');
+var reqIp = require('request-ip');
 var app = express();
 var port = process.env.PORT || 3000;
 
@@ -11,7 +12,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/api/whoami', function(req, res){
-    var ipAddress = req.connection.remoteAddress;
+    var ipAddress = reqIp.getClientIp(req);
     var lang = req.headers['accept-language'];
     var software = req.headers['user-agent'];
     
